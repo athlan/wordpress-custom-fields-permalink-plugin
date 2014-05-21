@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: Custom Fields Permalink 2
-Plugin URI: http://athlan.pl/custom-fields-permalink
-Description: This plugin enable to make a permalink from custom field's value.
+Plugin URI: http://athlan.pl/wordpress-custom-fields-permalink-plugin
+Description: Plugin allows to use post's custom fields values in permalink structure by adding %field_fieldname%, for posts, pages and custom post types.
 Author: Piotr Pelczar
 Version: 2.0
 Author URI: http://athlan.pl/
