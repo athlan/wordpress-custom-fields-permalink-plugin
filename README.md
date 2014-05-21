@@ -7,7 +7,7 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 * Contributors: <a href="https://github.com/athlan">athlan</a>
 * Plugin url: [http://athlan.pl/wordpres-custom-fields-permalink-plugin/](http://athlan.pl/wordpres-custom-fields-permalink-plugin/)
 * Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
-* Requires at least: 3.0.1
+* Requires at least: 3.0.0
 * Tested up to: 3.9.1
 * Stable tag: 1.0
 * License: MIT
