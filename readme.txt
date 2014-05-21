@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Custom Fields Permalink 2 ===
 Contributors: athlan
 Donate link: http://athlan.pl/wordpres-custom-fields-permalink-plugin/
 Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
