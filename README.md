@@ -17,6 +17,8 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 
 Plugin allows to use post's custom fields values in permalink structure by adding `%field_fieldname%` rewrite tag.
 
+![Screenshot](https://raw.githubusercontent.com/athlan/wordpress-custom-fields-permalink-plugin/master/assets/screenshot-1.png "Screenshot")
+
 Examples:
 
 * `http://example.com/%field_event_date_from%/%postname%/`
