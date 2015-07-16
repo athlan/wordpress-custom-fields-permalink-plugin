@@ -1,4 +1,4 @@
-# Custom Fields Permalink 2
+# Custom Fields Permalink Redux
 
 Plugin allows to use post's custom fields values in permalink structure by adding %field_fieldname%, for posts, pages and custom post types.
 
