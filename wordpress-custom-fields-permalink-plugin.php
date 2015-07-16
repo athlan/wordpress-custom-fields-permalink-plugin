@@ -12,6 +12,8 @@ class CustomFieldsPermalink {
 
 	const PARAM_CUSTOMFIELD_KEY = 'custom_field_key';
 	const PARAM_CUSTOMFIELD_VALUE = 'custom_field_value';
+    
+    public static $checkCustomFieldValue = false;
 	
 	public static function linkPost($permalink, $post, $leavename) {
 		return self::linkRewriteFields($permalink, $post);
@@ -31,7 +33,11 @@ class CustomFieldsPermalink {
 		if(!isset($postMeta[$fieldName]))
 			return '';
 		
-		return implode('', $postMeta[$fieldName]);
+		$value = implode('', $postMeta[$fieldName]);
+        
+        $value = sanitize_title($value);
+        
+        return $value;
 	}
 	
 	public static function registerExtraQueryVars($value) {
@@ -43,8 +49,12 @@ class CustomFieldsPermalink {
 		// additional parameters added to Wordpress
 		// Main Loop query
 		$value['meta_key'] = $value[self::PARAM_CUSTOMFIELD_KEY];
-		$value['meta_value'] = $value[self::PARAM_CUSTOMFIELD_VALUE];
-		
+        
+        // do not check field's value for this moment
+        if(true === self::$checkCustomFieldValue) {
+            $value['meta_value'] = $value[self::PARAM_CUSTOMFIELD_VALUE];
+		}
+        
 		// remove temporary injected parameters
 		unset($value[self::PARAM_CUSTOMFIELD_KEY], $value[self::PARAM_CUSTOMFIELD_VALUE]);
 		
