@@ -1,0 +1,19 @@
+{
+  "name": "athlan/custom-fields-permalink-plugin",
+  "description": "Plugin allows to use post's custom fields values in permalink structure by adding %field_fieldname%, for posts, pages and custom post types.",
+  "keywords": ["wordpress", "plugin"],
+  "homepage": "http://athlan.pl/wordpres-custom-fields-permalink-plugin/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Piotr Pelczar",
+      "email": "me@athlan.pl",
+      "homepage": "http://athlan.pl"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "*"
+  }
+}
