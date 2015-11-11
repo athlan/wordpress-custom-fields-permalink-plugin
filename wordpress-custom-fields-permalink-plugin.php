@@ -24,7 +24,11 @@ class CustomFieldsPermalink {
     }
     
     protected static function linkRewriteFields($permalink, $post) {
-        return preg_replace('#(%field_(.*?)%)#e', 'CustomFieldsPermalink::linkRewriteFieldsExtract($post, "\\2")', $permalink);
+        $replaceCallback = function($matches) use (&$post) {
+            return CustomFieldsPermalink::linkRewriteFieldsExtract($post, $matches[2]);
+        };
+        
+        return preg_replace_callback('#(%field_(.*?)%)#', $replaceCallback, $permalink);
     }
     
     public static function linkRewriteFieldsExtract($post, $fieldName) {
@@ -48,15 +52,22 @@ class CustomFieldsPermalink {
     public static function processRequest($value) {
         // additional parameters added to Wordpress
         // Main Loop query
-        $value['meta_key'] = $value[self::PARAM_CUSTOMFIELD_KEY];
-        
-        // do not check field's value for this moment
-        if(true === self::$checkCustomFieldValue) {
-            $value['meta_value'] = $value[self::PARAM_CUSTOMFIELD_VALUE];
+        if(array_key_exists(self::PARAM_CUSTOMFIELD_KEY, $value)) {
+            $value['meta_key'] = $value[self::PARAM_CUSTOMFIELD_KEY];
+            
+            // remove temporary injected parameter
+            unset($value[self::PARAM_CUSTOMFIELD_KEY]);
+            
+            // do not check field's value for this moment
+            if(true === self::$checkCustomFieldValue) {
+                if(array_key_exists(self::PARAM_CUSTOMFIELD_VALUE, $value)) {
+                    $value['meta_value'] = $value[self::PARAM_CUSTOMFIELD_VALUE];
+                    
+                    // remove temporary injected parameter
+                    unset($value[self::PARAM_CUSTOMFIELD_VALUE]);
+                }
+            }
         }
-        
-        // remove temporary injected parameters
-        unset($value[self::PARAM_CUSTOMFIELD_KEY], $value[self::PARAM_CUSTOMFIELD_VALUE]);
         
         return $value;
     }
