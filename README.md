@@ -2,7 +2,7 @@
 
 Plugin allows to use post's custom fields values in permalink structure by adding %field_fieldname%, for posts, pages and custom post types.
 
-![Build Status](https://travis-ci.org/athlan/wordpress-custom-fields-permalink-plugin.svg?branch=master)
+[![Build Status](https://travis-ci.org/athlan/wordpress-custom-fields-permalink-plugin.svg?branch=master)](https://travis-ci.org/athlan/wordpress-custom-fields-permalink-plugin)
 
 ---
 
@@ -10,7 +10,7 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 * Plugin url: [http://athlan.pl/wordpres-custom-fields-permalink-plugin/](http://athlan.pl/wordpres-custom-fields-permalink-plugin/)
 * Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
 * Requires at least: 3.0.0
-* Tested up to: 4.9.3
+* Tested up to: 4.9.4
 * Stable tag: 1.0.2
 * License: MIT
 * License URI: http://opensource.org/licenses/MIT
@@ -39,16 +39,9 @@ Plugin is also avaliable on GitHub:
 
 ## Installation
 
-* Download the wordpress-custom-fields-permalink-plugin.zip file to your computer.
-* Unzip the file.
-* Upload the `wordpress-custom-fields-permalink-plugin` directory to your `/wp-content/plugins/` directory.
-* Activate the plugin through the 'Plugins' menu in WordPress.
-* Now you can use `%field_fieldname%` tag in Settings -> Permalinks.
+Search for **Custom Fields Permalink 2** or follow the link
+https://wordpress.org/plugins/custom-fields-permalink-redux/
 
 ## Changelog
 
 Release notes: https://github.com/athlan/wordpress-custom-fields-permalink-plugin/releases
-
-## Upgrade Notice
-
-No upgrade notices.
