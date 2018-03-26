@@ -28,26 +28,27 @@ The plugin works for:
 * pages
 * custom post types
 
-Plugin is also avaliable on GitHub:
+Plugin is also available on GitHub:
 <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin">https://github.com/athlan/wordpress-custom-fields-permalink-plugin</a>
 
 == Installation ==
 
-* Download the wordpress-custom-fields-permalink-plugin.zip file to your computer.
-* Unzip the file.
-* Upload the `wordpress-custom-fields-permalink-plugin` directory to your `/wp-content/plugins/` directory.
-* Activate the plugin through the 'Plugins' menu in WordPress.
-* Now you can use `%field_fieldname%` tag in Settings -> Permalinks.
+* Install plugin in WordPress system in Plugins section. You can search for "Custom Fields Permalink 2".
+* Done! Now you can use `%field_fieldname%` tag in Settings -> Permalinks.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Found the bug. How to raise a ticket? =
 
-An answer to that question.
+The best way is to raise the ticket under the GitHub repository:
+<a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/issues/new">https://github.com/athlan/wordpress-custom-fields-permalink-plugin/issues/new</a>
 
-= What about foo bar? =
+= I want to make a contribution =
 
-Answer to foo bar dilemma.
+We would be very grateful in any contribution. If you have a idea for the feature, please discuss it first by
+<a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/issues/new">raising the ticket</a>.
+When the assumptions are ready, please
+<a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/pulls">make a pull request</a> at GitHub.
 
 == Screenshots ==
 
