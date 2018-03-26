@@ -36,8 +36,8 @@ class CustomFieldsPermalink {
         
         if(!isset($postMeta[$fieldName]))
             return '';
-        
-        $value = implode('', $postMeta[$fieldName]);
+
+        $value = $postMeta[$fieldName][0];
         
         $value = sanitize_title($value);
         
