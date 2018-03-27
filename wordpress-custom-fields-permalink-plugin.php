@@ -6,6 +6,12 @@
  * Author: Piotr Pelczar
  * Version: 1.0.3
  * Author URI: http://athlan.pl/
+ *
+ * @package WordPress_Custom_Fields_Permalink
+ */
+
+/**
+ * Main plugin binding file.
  */
 
 require 'includes/class-customfieldspermalink.php';
