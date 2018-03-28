@@ -53,6 +53,7 @@ When the assumptions are ready, please
 == Screenshots ==
 
 1. Pemralink settings
+2. Custom post types Pemralink settings
 
 == Changelog ==
 
