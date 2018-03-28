@@ -1,57 +1,78 @@
 <?php
+/**
+ * Tests case.
+ *
+ * @package WordPress_Custom_Fields_Permalink
+ */
 
+/**
+ * Class BasicPostNamePermalinkStructure
+ */
 class BasicPostNamePermalinkStructure extends WP_UnitTestCase {
 
-    /**
-     * @var PermalinkSteps
-     */
-    private $permalinkSteps;
+	/**
+	 * The PermalinkSteps.
+	 *
+	 * @var PermalinkSteps
+	 */
+	private $permalink_steps;
 
-    /**
-     * @var PermalinkAsserter
-     */
-    private $permalinkAsserter;
+	/**
+	 * The PermalinkAsserter.
+	 *
+	 * @var PermalinkAsserter
+	 */
+	private $permalink_asserter;
 
-    public function setUp() {
-        parent::setUp();
+	/**
+	 * Set up test.
+	 */
+	public function setUp() {
+		parent::setUp();
 
-        $this->permalinkSteps = new PermalinkSteps($this);
-        $this->permalinkAsserter = new PermalinkAsserter($this);
-    }
-
-	function test_generates_permalink_to_post() {
-	    // given
-        $this->permalinkSteps->given_postname_permalink_structure();
-
-        $postParams = [
-	        'post_title' => 'Some post title',
-            'meta_input' => [
-                'some_meta_key' => 'Some meta value',
-            ],
-        ];
-        $createdPostId = $this->factory()->post->create($postParams);
-
-        // when & then
-        $this->permalinkAsserter->has_permalink($createdPostId, "/some-post-title/");
+		$this->permalink_steps    = new PermalinkSteps( $this );
+		$this->permalink_asserter = new PermalinkAsserter( $this );
 	}
 
-    function test_go_to_post_when_simple_postname_permalink_structure_and_plugin_activated() {
-        // given
-        $this->permalinkSteps->given_postname_permalink_structure();
+	/**
+	 * Test case.
+	 */
+	function test_generates_permalink_to_post() {
+		// given.
+		$this->permalink_steps->given_postname_permalink_structure();
 
-        $postParams = [
-            'post_title' => 'Some post title',
-            'meta_input' => [
-                'some_meta_key' => 'Some meta value',
-            ],
-        ];
-        $createdPostId = $this->factory()->post->create($postParams);
+		$post_params     = [
+			'post_title' => 'Some post title',
+			'meta_input' => [
+				'some_meta_key' => 'Some meta value',
+			],
+		];
+		$created_post_id = $this->factory()->post->create( $post_params );
 
-        // when
-        $this->go_to('/some-post-title/');
+		// when & then.
+		$this->permalink_asserter->has_permalink( $created_post_id, '/some-post-title/' );
+	}
 
-        // then
-        $this->assertFalse(is_404());
-        $this->assertEquals($createdPostId, get_the_ID());
-    }
+	/**
+	 * Test case.
+	 */
+	function test_go_to_post_when_simple_postname_permalink_structure_and_plugin_activated() {
+		// given.
+		$this->permalink_steps->given_postname_permalink_structure();
+
+		$post_params     = [
+			'post_title' => 'Some post title',
+			'meta_input' => [
+				'some_meta_key' => 'Some meta value',
+			],
+		];
+		$created_post_id = $this->factory()->post->create( $post_params );
+
+		// when.
+		$this->go_to( '/some-post-title/' );
+
+		// then.
+		$this->assertFalse( is_404() );
+		$this->assertEquals( $created_post_id, get_the_ID() );
+	}
 }
