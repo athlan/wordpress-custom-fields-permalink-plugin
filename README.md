@@ -21,8 +21,6 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 
 ![Screenshot](https://raw.githubusercontent.com/athlan/wordpress-custom-fields-permalink-plugin/master/assets/screenshot-1.png "Screenshot")
 
-![Screenshot](https://raw.githubusercontent.com/athlan/wordpress-custom-fields-permalink-plugin/master/assets/screenshot-2.png "Screenshot")
-
 Examples:
 
 * `http://example.com/%field_event_date_from%/%postname%/`
