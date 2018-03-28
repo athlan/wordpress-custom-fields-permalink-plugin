@@ -1,4 +1,9 @@
 <?php
+/**
+ * Tests bootstrap file.
+ *
+ * @package WordPress_Custom_Fields_Permalink
+ */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
@@ -25,5 +30,5 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
 
-require 'PermalinkSteps.php';
-require 'PermalinkAsserter.php';
+require 'class-permalinksteps.php';
+require 'class-permalinkasserter.php';
