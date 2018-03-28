@@ -21,7 +21,7 @@ class BasicPostNamePermalinkStructure extends WP_UnitTestCase {
 
 	function test_generates_permalink_to_post() {
 	    // given
-        $this->permalinkSteps->givenPostnamePermalinkStructure();
+        $this->permalinkSteps->given_postname_permalink_structure();
 
         $postParams = [
 	        'post_title' => 'Some post title',
@@ -32,12 +32,12 @@ class BasicPostNamePermalinkStructure extends WP_UnitTestCase {
         $createdPostId = $this->factory()->post->create($postParams);
 
         // when & then
-        $this->permalinkAsserter->hasPermalink($createdPostId, "/some-post-title/");
+        $this->permalinkAsserter->has_permalink($createdPostId, "/some-post-title/");
 	}
 
     function test_go_to_post_when_simple_postname_permalink_structure_and_plugin_activated() {
         // given
-        $this->permalinkSteps->givenPostnamePermalinkStructure();
+        $this->permalinkSteps->given_postname_permalink_structure();
 
         $postParams = [
             'post_title' => 'Some post title',

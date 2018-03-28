@@ -21,7 +21,7 @@ class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
 
 	function test_generates_permalink_to_post_while_duplicated_meta_key() {
 	    // given
-        $this->permalinkSteps->givenPermalinkStructure("/%field_some_meta_key%/%postname%/");
+        $this->permalinkSteps->given_permalink_structure("/%field_some_meta_key%/%postname%/");
 
         $someMetaKey = 'some_meta_key';
         $postParams = [
@@ -38,12 +38,12 @@ class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
 
         // then
         $this->assertCount(2, $createdPostMetaValues[$someMetaKey]);
-        $this->permalinkAsserter->hasPermalink($createdPostId, "/some-meta-value/some-post-title/");
+        $this->permalinkAsserter->has_permalink($createdPostId, "/some-meta-value/some-post-title/");
 	}
 
     function test_go_to_post_when_duplicated_meta_key_and_use_first_one() {
         // given
-        $this->permalinkSteps->givenPermalinkStructure("/%field_some_meta_key%/%postname%/");
+        $this->permalinkSteps->given_permalink_structure("/%field_some_meta_key%/%postname%/");
 
         $someMetaKey = 'some_meta_key';
         $postParams = [
@@ -65,7 +65,7 @@ class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
 
     function test_go_to_post_when_duplicated_meta_key_and_use_duplicate_one() {
         // given
-        $this->permalinkSteps->givenPermalinkStructure("/%field_some_meta_key%/%postname%/");
+        $this->permalinkSteps->given_permalink_structure("/%field_some_meta_key%/%postname%/");
 
         $someMetaKey = 'some_meta_key';
         $postParams = [

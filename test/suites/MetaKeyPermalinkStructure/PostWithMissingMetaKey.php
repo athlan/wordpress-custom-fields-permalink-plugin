@@ -21,7 +21,7 @@ class PostWithMissingMetaKey extends WP_UnitTestCase {
 
 	function test_generates_permalink_to_post_while_missing_meta_key() {
 	    // given
-        $this->permalinkSteps->givenPermalinkStructure("/%field_some_meta_key%/%postname%/");
+        $this->permalinkSteps->given_permalink_structure("/%field_some_meta_key%/%postname%/");
 
         $postParams = [
 	        'post_title' => 'Some post title',
@@ -33,12 +33,12 @@ class PostWithMissingMetaKey extends WP_UnitTestCase {
         $createdPostId = $this->factory()->post->create($postParams);
 
         // when & then
-        $this->permalinkAsserter->hasPermalink($createdPostId, "/some-post-title/");
+        $this->permalinkAsserter->has_permalink($createdPostId, "/some-post-title/");
 	}
 
     function test_go_to_post_when_missing_meta_key() {
         // given
-        $this->permalinkSteps->givenPermalinkStructure("/%field_some_meta_key%/%postname%/");
+        $this->permalinkSteps->given_permalink_structure("/%field_some_meta_key%/%postname%/");
 
         $postParams = [
             'post_title' => 'Some post title',

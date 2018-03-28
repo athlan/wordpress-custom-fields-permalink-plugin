@@ -2,7 +2,7 @@
 /**
  * Custom Fields Permalink 2.
  *
- * @package     WordPress_Custom_Fields_Permalink
+ * @package WordPress_Custom_Fields_Permalink
  *
  * @wordpress-plugin
  * Plugin Name: Custom Fields Permalink 2
