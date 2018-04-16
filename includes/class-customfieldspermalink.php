@@ -77,7 +77,7 @@ class CustomFieldsPermalink {
 	 *
 	 * @return string
 	 */
-	private static function link_rewrite_fields_extract( $post, $field_name ) {
+	public static function link_rewrite_fields_extract( $post, $field_name ) {
 		$post_meta = get_post_meta( $post->ID );
 
 		if ( ! isset( $post_meta[ $field_name ] ) ) {
