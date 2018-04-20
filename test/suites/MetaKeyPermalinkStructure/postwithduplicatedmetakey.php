@@ -8,31 +8,7 @@
 /**
  * Class PostWithDuplicatedMetaKey
  */
-class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
-
-	/**
-	 * The PermalinkSteps.
-	 *
-	 * @var PermalinkSteps
-	 */
-	private $permalink_steps;
-
-	/**
-	 * The PermalinkAsserter.
-	 *
-	 * @var PermalinkAsserter
-	 */
-	private $permalink_asserter;
-
-	/**
-	 * Set up test.
-	 */
-	public function setUp() {
-		parent::setUp();
-
-		$this->permalink_steps    = new PermalinkSteps( $this );
-		$this->permalink_asserter = new PermalinkAsserter( $this );
-	}
+class PostWithDuplicatedMetaKey extends BaseTestCase {
 
 	/**
 	 * Test case.
@@ -80,8 +56,7 @@ class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
 		$this->go_to( '/some-meta-value/some-post-title/' );
 
 		// then.
-		$this->assertFalse( is_404() );
-		$this->assertEquals( $created_post_id, get_the_ID() );
+		$this->navigation_asserter->then_displayed_post($created_post_id);
 	}
 
 	/**
@@ -105,7 +80,6 @@ class PostWithDuplicatedMetaKey extends WP_UnitTestCase {
 		$this->go_to( '/some-duplicated-meta-value/some-post-title/' );
 
 		// then.
-		$this->assertFalse( is_404() );
-		$this->assertEquals( $created_post_id, get_the_ID() );
+		$this->navigation_asserter->then_displayed_post($created_post_id);
 	}
 }
