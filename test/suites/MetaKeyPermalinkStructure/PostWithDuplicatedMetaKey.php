@@ -56,7 +56,7 @@ class PostWithDuplicatedMetaKey extends BaseTestCase {
 		$this->go_to( '/some-meta-value/some-post-title/' );
 
 		// then.
-		$this->navigation_asserter->then_displayed_post($created_post_id);
+		$this->navigation_asserter->then_displayed_post( $created_post_id );
 	}
 
 	/**
@@ -80,6 +80,6 @@ class PostWithDuplicatedMetaKey extends BaseTestCase {
 		$this->go_to( '/some-duplicated-meta-value/some-post-title/' );
 
 		// then.
-		$this->navigation_asserter->then_displayed_post($created_post_id);
+		$this->navigation_asserter->then_displayed_post( $created_post_id );
 	}
 }

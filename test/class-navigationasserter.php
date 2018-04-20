@@ -34,7 +34,7 @@ class NavigationAsserter {
 	 * @return NavigationAsserter Fluent interface.
 	 */
 	public function then_displayed_post( $post ) {
-		$this->unit_test_case->assertTrue( is_single($post) );
+		$this->unit_test_case->assertTrue( is_single( $post ) );
 		return $this;
 	}
 
@@ -46,7 +46,7 @@ class NavigationAsserter {
 	 * @return NavigationAsserter Fluent interface.
 	 */
 	public function then_not_displayed_post( $post ) {
-		$this->unit_test_case->assertFalse( is_single($post) );
+		$this->unit_test_case->assertFalse( is_single( $post ) );
 		return $this;
 	}
 
@@ -58,7 +58,7 @@ class NavigationAsserter {
 	 * @return NavigationAsserter Fluent interface.
 	 */
 	public function then_displayed_page( $post ) {
-		$this->unit_test_case->assertTrue( is_page($post) );
+		$this->unit_test_case->assertTrue( is_page( $post ) );
 		return $this;
 	}
 
@@ -70,7 +70,7 @@ class NavigationAsserter {
 	 * @return NavigationAsserter Fluent interface.
 	 */
 	public function then_not_displayed_page( $post ) {
-		$this->unit_test_case->assertFalse( is_page($post) );
+		$this->unit_test_case->assertFalse( is_page( $post ) );
 		return $this;
 	}
 

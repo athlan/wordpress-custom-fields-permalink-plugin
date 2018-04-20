@@ -50,7 +50,7 @@ class PostWithMissingMetaKey extends BaseTestCase {
 		$this->go_to( '/inexisting-meta-value/some-post-title/' );
 
 		// then.
-		$this->navigation_asserter->then_not_displayed_post($created_post_id)
+		$this->navigation_asserter->then_not_displayed_post( $created_post_id )
 			->and_also()
 			->then_is_404();
 	}
@@ -65,7 +65,7 @@ class PostWithMissingMetaKey extends BaseTestCase {
 		$post_params     = [
 			'post_title' => 'Some post title',
 			'meta_input' => [
-				 'some_meta_key' => 'Some meta value',
+				'some_meta_key' => 'Some meta value',
 			],
 		];
 		$created_post_id = $this->factory()->post->create( $post_params );
@@ -74,6 +74,6 @@ class PostWithMissingMetaKey extends BaseTestCase {
 		$this->go_to( '/some-post-title/' );
 
 		// then.
-		$this->navigation_asserter->then_not_displayed_post($created_post_id);
+		$this->navigation_asserter->then_not_displayed_post( $created_post_id );
 	}
 }
