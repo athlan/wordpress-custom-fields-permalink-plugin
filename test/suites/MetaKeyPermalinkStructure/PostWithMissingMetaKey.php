@@ -8,31 +8,7 @@
 /**
  * Class PostWithMissingMetaKey
  */
-class PostWithMissingMetaKey extends WP_UnitTestCase {
-
-	/**
-	 * The PermalinkSteps.
-	 *
-	 * @var PermalinkSteps
-	 */
-	private $permalink_steps;
-
-	/**
-	 * The PermalinkAsserter.
-	 *
-	 * @var PermalinkAsserter
-	 */
-	private $permalink_asserter;
-
-	/**
-	 * Set up test.
-	 */
-	public function setUp() {
-		parent::setUp();
-
-		$this->permalink_steps    = new PermalinkSteps( $this );
-		$this->permalink_asserter = new PermalinkAsserter( $this );
-	}
+class PostWithMissingMetaKey extends BaseTestCase {
 
 	/**
 	 * Test case.
@@ -57,7 +33,7 @@ class PostWithMissingMetaKey extends WP_UnitTestCase {
 	/**
 	 * Test case.
 	 */
-	function test_go_to_post_when_missing_meta_key() {
+	function test_404_when_missing_meta_key() {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
@@ -74,6 +50,30 @@ class PostWithMissingMetaKey extends WP_UnitTestCase {
 		$this->go_to( '/inexisting-meta-value/some-post-title/' );
 
 		// then.
-		$this->assertTrue( is_404() );
+		$this->navigation_asserter->then_not_displayed_post( $created_post_id )
+			->and_also()
+			->then_is_404();
+	}
+
+	/**
+	 * Test case.
+	 */
+	function test_not_go_to_the_post_when_missing_meta_key_part_in_url() {
+		// given.
+		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
+
+		$post_params     = [
+			'post_title' => 'Some post title',
+			'meta_input' => [
+				'some_meta_key' => 'Some meta value',
+			],
+		];
+		$created_post_id = $this->factory()->post->create( $post_params );
+
+		// when.
+		$this->go_to( '/some-post-title/' );
+
+		// then.
+		$this->navigation_asserter->then_not_displayed_post( $created_post_id );
 	}
 }

@@ -8,31 +8,7 @@
 /**
  * Class BasicPostNamePermalinkStructure
  */
-class BasicPostNamePermalinkStructure extends WP_UnitTestCase {
-
-	/**
-	 * The PermalinkSteps.
-	 *
-	 * @var PermalinkSteps
-	 */
-	private $permalink_steps;
-
-	/**
-	 * The PermalinkAsserter.
-	 *
-	 * @var PermalinkAsserter
-	 */
-	private $permalink_asserter;
-
-	/**
-	 * Set up test.
-	 */
-	public function setUp() {
-		parent::setUp();
-
-		$this->permalink_steps    = new PermalinkSteps( $this );
-		$this->permalink_asserter = new PermalinkAsserter( $this );
-	}
+class BasicPostNamePermalinkStructure extends BaseTestCase {
 
 	/**
 	 * Test case.

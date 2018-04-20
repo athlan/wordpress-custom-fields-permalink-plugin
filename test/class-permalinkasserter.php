@@ -31,10 +31,23 @@ class PermalinkAsserter {
 	 *
 	 * @param WP_Post $post The post.
 	 * @param string  $permalink Expected permalink.
+	 *
+	 * @return PermalinkAsserter Fluent interface.
 	 */
 	public function has_permalink( $post, $permalink ) {
 		$actual = wp_make_link_relative( get_the_permalink( $post ) );
 
 		$this->unit_test_case->assertEquals( $permalink, $actual );
+
+		return $this;
+	}
+
+	/**
+	 * Fluent interface.
+	 *
+	 * @return PermalinkAsserter Fluent interface.
+	 */
+	public function and_also() {
+		return $this;
 	}
 }

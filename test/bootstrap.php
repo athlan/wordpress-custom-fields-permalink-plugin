@@ -30,5 +30,7 @@ tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 // Start up the WP testing environment.
 require $_tests_dir . '/includes/bootstrap.php';
 
+require 'class-basetestcase.php';
 require 'class-permalinksteps.php';
 require 'class-permalinkasserter.php';
+require 'class-navigationasserter.php';
