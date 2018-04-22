@@ -76,8 +76,8 @@ class PostWithDynamicallyCreatedMetaKey extends BaseTestCase {
 
 		// then.
 		$this->navigation_asserter->then_not_displayed_post( $created_post_id )
-		                          ->and_also()
-		                          ->then_is_404();
+			->and_also()
+			->then_is_404();
 	}
 
 	/**
