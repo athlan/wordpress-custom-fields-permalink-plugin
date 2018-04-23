@@ -17,13 +17,13 @@ class PostWithDynamicallyCreatedMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				// There is missing meta key here
 				// 'some_meta_key' => 'Some meta value', .
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when & then.
@@ -37,13 +37,13 @@ class PostWithDynamicallyCreatedMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				// There is missing meta key here
 				// 'some_meta_key' => 'Some meta value', .
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when.
@@ -62,12 +62,12 @@ class PostWithDynamicallyCreatedMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				'some_meta_key' => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when.
