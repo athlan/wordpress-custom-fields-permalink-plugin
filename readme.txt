@@ -50,6 +50,18 @@ We would be very grateful in any contribution. If you have a idea for the featur
 When the assumptions are ready, please
 <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/pulls">make a pull request</a> at GitHub.
 
+= How to generate missing custom post meta keys and values =
+
+In case of missing custom post field values you can generate them on-the-fly using <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/wiki/Plugin-hooks#generate_dynamic_metadata"><code>generate_dynamic_metadata</code></a> filter.
+
+Read <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/wiki/FAQ#how-to-generate-missing-custom-post-meta-keys-and-values">the example</a>.
+
+= How to generate calculated dynamic custom post meta keys and values =
+
+You can generate custom post fields dynamically coding some logic using  <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/wiki/Plugin-hooks#generate_dynamic_metadata"><code>generate_dynamic_metadata</code></a> filter.
+
+Read <a href="https://github.com/athlan/wordpress-custom-fields-permalink-plugin/wiki/FAQ#how-to-generate-calculated-dynamic-custom-post-meta-keys-and-values">the example</a>.
+
 == Screenshots ==
 
 1. Pemralink settings
