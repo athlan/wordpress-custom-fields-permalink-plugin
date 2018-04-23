@@ -41,6 +41,9 @@ handle_wp_min() {
 
     sed -i -E "s/Requires at least: (.+)/Requires at least: $version_to_bump/" "$file_readme_wp"
     echo "Version bumped in $file_readme_wp"
+
+    sed -i -E "s/env: WP_VERSION=(.+) # WP_MIN_HERE/env: WP_VERSION=$version_to_bump # WP_MIN_HERE/" "$file_travisci"
+    echo "Version bumped in $file_travisci"
 }
 
 handle_wp_to() {
@@ -61,6 +64,9 @@ handle_php_min() {
 
     sed -i -E "s/Requires PHP: (.+)/Requires PHP: $version_to_bump/" "$file_readme_wp"
     echo "Version bumped in $file_readme_wp"
+
+    sed -i -E "s/php: (.+) # PHP_MIN_HERE/php: $version_to_bump # PHP_MIN_HERE/" "$file_travisci"
+    echo "Version bumped in $file_travisci"
 }
 
 if [ $(type -t $version_type) == function ]; then
