@@ -29,6 +29,7 @@ matrix:
       env: WP_VERSION=4.5.0 # WP_MIN_HERE
     - php: 5.6
       env: WP_VERSION=latest
+      dist: precise
 #    - php: 5.6
 #      env: WP_VERSION=trunk
     - php: 5.6
