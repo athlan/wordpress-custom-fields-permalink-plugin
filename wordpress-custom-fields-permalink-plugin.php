@@ -9,7 +9,7 @@
  * Plugin URI: http://athlan.pl/wordpress-custom-fields-permalink-plugin
  * Description: Plugin allows to use post's custom fields values in permalink structure by adding %field_fieldname%, for posts, pages and custom post types.
  * Author: Piotr Pelczar
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author URI: http://athlan.pl/
  */
 
