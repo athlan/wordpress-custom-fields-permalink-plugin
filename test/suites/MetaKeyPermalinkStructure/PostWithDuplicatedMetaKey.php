@@ -18,12 +18,12 @@ class PostWithDuplicatedMetaKey extends BaseTestCase {
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
 		$some_meta_key   = 'some_meta_key';
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				$some_meta_key => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 		add_post_meta( $created_post_id, $some_meta_key, 'Some duplicated meta value' );
 
@@ -43,12 +43,12 @@ class PostWithDuplicatedMetaKey extends BaseTestCase {
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
 		$some_meta_key   = 'some_meta_key';
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				$some_meta_key => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 		add_post_meta( $created_post_id, $some_meta_key, 'Some duplicated meta value' );
 
@@ -67,12 +67,12 @@ class PostWithDuplicatedMetaKey extends BaseTestCase {
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
 		$some_meta_key   = 'some_meta_key';
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				$some_meta_key => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 		add_post_meta( $created_post_id, $some_meta_key, 'Some duplicated meta value' );
 
