@@ -14,13 +14,6 @@ class CustomFieldsPermalink {
 	const PARAM_CUSTOMFIELD_VALUE = 'custom_field_value';
 
 	/**
-	 * Do check against meta value or not.
-	 *
-	 * @var bool
-	 */
-	private static $check_custom_field_value = false;
-
-	/**
 	 * Filters the permalink structure for a post before token replacement occurs..
 	 * The pre_post_link filter implementation.
 	 *
@@ -78,7 +71,7 @@ class CustomFieldsPermalink {
 	 * @return string
 	 */
 	public static function link_rewrite_fields_extract( $post, $field_name ) {
-		$post_meta = get_post_meta( $post->ID );
+		$post_meta = self::get_post_meta( $post );
 
 		if ( ! isset( $post_meta[ $field_name ] ) ) {
 			return '';
@@ -120,24 +113,74 @@ class CustomFieldsPermalink {
 	public static function process_request( $query_vars ) {
 		// Additional parameters added to WordPress.
 		// Main Loop query.
-		if ( array_key_exists( self::PARAM_CUSTOMFIELD_KEY, $query_vars ) ) {
-			$query_vars['meta_key'] = $query_vars[ self::PARAM_CUSTOMFIELD_KEY ];
+		return $query_vars;
+	}
 
-			// Remove temporary injected parameter.
-			unset( $query_vars[ self::PARAM_CUSTOMFIELD_KEY ] );
+	/**
+	 * Filters whether to short-circuit default header status handling.
+	 *
+	 * Raises 404 if post has been rewrited, but:
+	 * 1. Custom field key does not exists or
+	 * 2. Custom field value does not matches.
+	 *
+	 * @param bool     $preempt  Whether to short-circuit default header status handling. Default false.
+	 * @param WP_Query $wp_query WordPress Query object.
+	 *
+	 * @return bool Returning a non-false value from the filter will short-circuit the handling
+	 * and return early.
+	 *
+	 * @link https://developer.wordpress.org/reference/hooks/pre_handle_404/
+	 */
+	public static function pre_handle_404( $preempt, $wp_query ) {
+		// Analyse only if there is post parsed.
+		if ( ! is_single() ) {
+			return false;
+		}
 
-			// Do not check field's value for this moment.
-			if ( true === self::$check_custom_field_value ) {
-				if ( array_key_exists( self::PARAM_CUSTOMFIELD_VALUE, $query_vars ) ) {
-					$query_vars['meta_value'] = $query_vars[ self::PARAM_CUSTOMFIELD_VALUE ];
+		$post = $wp_query->post;
 
-					// Remove temporary injected parameter.
-					unset( $query_vars[ self::PARAM_CUSTOMFIELD_VALUE ] );
+		// Analyse only if custom field used in query.
+		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_KEY, $wp_query->query_vars ) ) {
+			return false;
+		}
+
+		$raise_404 = false;
+
+		$post_meta = self::get_post_meta( $post );
+
+		$query_meta_key = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_KEY ];
+
+		if ( ! array_key_exists( $query_meta_key, $post_meta ) ) {
+			$raise_404 = true;
+		} else {
+			$query_meta_value = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_VALUE ];
+
+			// Look for at least one value match.
+			$value_matched = false;
+			foreach ( $post_meta[ $query_meta_key ] as $post_meta_value ) {
+				$post_meta_value_sanitized = sanitize_title( $post_meta_value );
+
+				if ( $query_meta_value == $post_meta_value_sanitized ) {
+					$value_matched = true;
+					break;
 				}
+			}
+
+			if ( ! $value_matched ) {
+				$raise_404 = true;
 			}
 		}
 
-		return $query_vars;
+		if ( $raise_404 ) {
+			$wp_query->set_404();
+			status_header( 404 );
+			nocache_headers();
+
+			// 404 already raised, break the circuit.
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -180,5 +223,37 @@ class CustomFieldsPermalink {
 		}
 
 		return $rules;
+	}
+
+	/**
+	 * Get post meta applying <code>wpcfp_get_post_metadata</code> filter.
+	 *
+	 * @param WP_Post $post The post.
+	 *
+	 * @return array
+	 */
+	private static function get_post_meta( $post ) {
+		$post_meta = get_post_meta( $post->ID );
+
+		/**
+		 * Filters of retrieved metadata of a post to link rewrite.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param array   $post_meta  The metadata returned from get_post_meta.
+		 * @param WP_Post $post       The post object.
+		 */
+		$filtered_post_meta = apply_filters( 'wpcfp_get_post_metadata', $post_meta, $post );
+
+		// Do some fixes after user generated values.
+		// If it's single value, wrap this in array, as WordPress internally does.
+		// @see get_post_meta() with $single = false.
+		foreach ( $filtered_post_meta as $key => &$value ) {
+			if ( ! is_array( $value ) ) {
+				$value = array( $value );
+			}
+		}
+
+		return $filtered_post_meta;
 	}
 }
