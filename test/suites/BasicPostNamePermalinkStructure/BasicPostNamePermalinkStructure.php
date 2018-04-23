@@ -17,12 +17,12 @@ class BasicPostNamePermalinkStructure extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_postname_permalink_structure();
 
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				'some_meta_key' => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when & then.
@@ -36,12 +36,12 @@ class BasicPostNamePermalinkStructure extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_postname_permalink_structure();
 
-		$post_params     = [
+		$post_params     = array(
 			'post_title' => 'Some post title',
-			'meta_input' => [
+			'meta_input' => array(
 				'some_meta_key' => 'Some meta value',
-			],
-		];
+			),
+		);
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when.

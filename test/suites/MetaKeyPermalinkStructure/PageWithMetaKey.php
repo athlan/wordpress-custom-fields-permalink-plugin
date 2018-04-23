@@ -20,14 +20,14 @@ class PageWithMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$page_params     = [
+		$page_params     = array(
 			'post_type'  => 'page',
 			'post_title' => 'Some page title',
-			'meta_input' => [
+			'meta_input' => array(
 				'some_meta_key'       => 'Some meta value',
 				'some_other_meta_key' => 'Some other meta value',
-			],
-		];
+			),
+		);
 		$created_page_id = $this->factory()->post->create( $page_params );
 
 		// when & then.
@@ -41,14 +41,14 @@ class PageWithMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = [
+		$post_params     = array(
 			'post_type'  => 'page',
 			'post_title' => 'Some page title',
-			'meta_input' => [
+			'meta_input' => array(
 				'some_meta_key'       => 'Some meta value',
 				'some_other_meta_key' => 'Some other meta value',
-			],
-		];
+			),
+		);
 		$created_page_id = $this->factory()->post->create( $post_params );
 
 		// when.
