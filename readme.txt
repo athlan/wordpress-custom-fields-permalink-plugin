@@ -2,7 +2,7 @@
 Contributors: athlan
 Donate link: http://athlan.pl/wordpres-custom-fields-permalink-plugin/
 Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
-Requires at least: 3.0.0
+Requires at least: 4.5.0
 Tested up to: 4.9.5
 Stable tag: 1.2.0
 Requires PHP: 5.3
