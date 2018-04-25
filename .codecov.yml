@@ -1,4 +1,4 @@
 comment:
-  layout: "reach, diff, flags, files"
+  layout: "diff, flags, files"
   behavior: new
   require_changes: true
