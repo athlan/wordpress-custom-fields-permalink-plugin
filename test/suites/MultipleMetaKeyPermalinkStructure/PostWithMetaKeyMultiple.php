@@ -59,7 +59,7 @@ class PostWithMetaKeyMultiple extends BaseTestCase {
 	/**
 	 * Test case.
 	 */
-	function test_not_go_to_the_post_when_invalid_value_of_meta_key_part_in_url() {
+	function test_not_go_to_the_post_when_invalid_first_value_of_meta_key_part_in_url() {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%field_some_meta_key2%/%postname%/' );
 
@@ -73,7 +73,30 @@ class PostWithMetaKeyMultiple extends BaseTestCase {
 		$created_post_id = $this->factory()->post->create( $post_params );
 
 		// when.
-		$this->go_to( '/some-different-meta-value/some-second-meta-value/some-post-title/' );
+		$this->go_to( '/some-different-meta-value/some-second-meta-value/some-post-title/1' );
+
+		// then.
+		$this->navigation_asserter->then_not_displayed_post( $created_post_id );
+	}
+
+	/**
+	 * Test case.
+	 */
+	function test_not_go_to_the_post_when_invalid_second_value_of_meta_key_part_in_url() {
+		// given.
+		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%field_some_meta_key2%/%postname%/' );
+
+		$post_params     = array(
+			'post_title' => 'Some post title',
+			'meta_input' => array(
+				'some_meta_key'  => 'Some meta value',
+				'some_meta_key2' => 'Some second meta value',
+			),
+		);
+		$created_post_id = $this->factory()->post->create( $post_params );
+
+		// when.
+		$this->go_to( '/some-meta-value/some-different-meta-value/some-post-title/1' );
 
 		// then.
 		$this->navigation_asserter->then_not_displayed_post( $created_post_id );
