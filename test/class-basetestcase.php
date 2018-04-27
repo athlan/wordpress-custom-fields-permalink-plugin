@@ -18,6 +18,13 @@ class BaseTestCase extends WP_UnitTestCase {
 	protected $permalink_steps;
 
 	/**
+	 * The CustomPostTypeSteps.
+	 *
+	 * @var CustomPostTypeSteps
+	 */
+	protected $custom_post_type_steps;
+
+	/**
 	 * The PermalinkAsserter.
 	 *
 	 * @var PermalinkAsserter
@@ -37,8 +44,9 @@ class BaseTestCase extends WP_UnitTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->permalink_steps     = new PermalinkSteps( $this );
-		$this->permalink_asserter  = new PermalinkAsserter( $this );
-		$this->navigation_asserter = new NavigationAsserter( $this );
+		$this->permalink_steps        = new PermalinkSteps( $this );
+		$this->custom_post_type_steps = new CustomPostTypeSteps( $this );
+		$this->permalink_asserter     = new PermalinkAsserter( $this );
+		$this->navigation_asserter    = new NavigationAsserter( $this );
 	}
 }
