@@ -14,3 +14,4 @@ add_filter( 'rewrite_rules_array', array( 'CustomFieldsPermalink', 'rewrite_rule
 add_filter( 'query_vars', array( 'CustomFieldsPermalink', 'register_extra_query_vars' ), 10, 1 );
 add_filter( 'request', array( 'CustomFieldsPermalink', 'process_request' ), 10, 1 );
 add_filter( 'pre_handle_404', array( 'CustomFieldsPermalink', 'pre_handle_404' ), 10, 2 );
+add_action( 'init', array( 'CustomFieldsPermalink', 'on_init' ) );
