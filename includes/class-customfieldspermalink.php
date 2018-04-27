@@ -252,4 +252,30 @@ class CustomFieldsPermalink {
 
 		return $filtered_post_meta;
 	}
+
+	/**
+	 * This hook is called once any activated plugins have been loaded.
+	 *
+	 * @link https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
+	 */
+	public static function on_init() {
+		$version_option_name = '_wordpress_custom_fields_permalink_plugin_version';
+		$version_from        = get_option( $version_option_name, null );
+		$version_to          = WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION;
+
+		if ( $version_from != $version_to ) {
+			self::update_plugin( $version_from, $version_to );
+			update_option( $version_option_name, $version_to, true );
+		}
+	}
+
+	/**
+	 * Upgrades the plugin.
+	 *
+	 * @param string $version_from Currently running version.
+	 * @param string $version_to   Version upgrade to.
+	 */
+	public static function update_plugin( $version_from, $version_to ) {
+		flush_rewrite_rules();
+	}
 }
