@@ -259,7 +259,7 @@ class CustomFieldsPermalink {
 	 * @link https://codex.wordpress.org/Plugin_API/Action_Reference/plugins_loaded
 	 */
 	public static function on_init() {
-		$version_option_name = 'WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION';
+		$version_option_name = '_wordpress_custom_fields_permalink_plugin_version';
 		$version_from        = get_option( $version_option_name, null );
 		$version_to          = WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION;
 

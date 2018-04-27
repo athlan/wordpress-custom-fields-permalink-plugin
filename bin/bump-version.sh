@@ -24,6 +24,7 @@ handle_plugin_version() {
     echo "Starting bumping plugin version to $version_to_bump"
 
     sed -i -E "s/Version: (.+)/Version: $version_to_bump/" "$file_plugin_main"
+    sed -i -E "s/'WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION', '(.+)'/'WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION', '$version_to_bump'/" "$file_plugin_main"
     echo "Version bumped in $file_plugin_main"
 
     sed -i -E "s/Stable tag: (.+)/Stable tag: $version_to_bump/" "$file_readme_repo"
