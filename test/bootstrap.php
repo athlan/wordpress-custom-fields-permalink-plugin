@@ -35,3 +35,5 @@ require 'class-permalinksteps.php';
 require 'class-customposttypesteps.php';
 require 'class-permalinkasserter.php';
 require 'class-navigationasserter.php';
+
+define( 'WP_RUN_CORE_TESTS', true );
