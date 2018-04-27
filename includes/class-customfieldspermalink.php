@@ -10,8 +10,7 @@
  */
 class CustomFieldsPermalink {
 
-	const PARAM_CUSTOMFIELD_KEY   = 'custom_field_key';
-	const PARAM_CUSTOMFIELD_VALUE = 'custom_field_value';
+	const PARAM_CUSTOMFIELD_PARAMES = 'custom_field_params';
 
 	/**
 	 * Filters the permalink structure for a post before token replacement occurs..
@@ -95,7 +94,7 @@ class CustomFieldsPermalink {
 	 * @return mixed
 	 */
 	public static function register_extra_query_vars( $public_query_vars ) {
-		array_push( $public_query_vars, self::PARAM_CUSTOMFIELD_KEY, self::PARAM_CUSTOMFIELD_VALUE );
+		array_push( $public_query_vars, self::PARAM_CUSTOMFIELD_PARAMES );
 
 		return $public_query_vars;
 	}
@@ -140,34 +139,36 @@ class CustomFieldsPermalink {
 		$post = $wp_query->post;
 
 		// Analyse only if custom field used in query.
-		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_KEY, $wp_query->query_vars ) ) {
+		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_PARAMES, $wp_query->query_vars )
+			|| ! is_array( $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMES ] ) ) {
 			return false;
 		}
+
+		$query_meta_params = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMES ];
 
 		$raise_404 = false;
 
 		$post_meta = self::get_post_meta( $post );
 
-		$query_meta_key = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_KEY ];
-
-		if ( ! array_key_exists( $query_meta_key, $post_meta ) ) {
-			$raise_404 = true;
-		} else {
-			$query_meta_value = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_VALUE ];
-
-			// Look for at least one value match.
-			$value_matched = false;
-			foreach ( $post_meta[ $query_meta_key ] as $post_meta_value ) {
-				$post_meta_value_sanitized = sanitize_title( $post_meta_value );
-
-				if ( $query_meta_value == $post_meta_value_sanitized ) {
-					$value_matched = true;
-					break;
-				}
-			}
-
-			if ( ! $value_matched ) {
+		foreach ( $query_meta_params as $query_meta_key => $query_meta_value ) {
+			if ( ! array_key_exists( $query_meta_key, $post_meta ) ) {
 				$raise_404 = true;
+				break;
+			} else {
+				// Look for at least one value match.
+				$value_matched = false;
+				foreach ( $post_meta[ $query_meta_key ] as $post_meta_value ) {
+					$post_meta_value_sanitized = sanitize_title( $post_meta_value );
+
+					if ( $query_meta_value == $post_meta_value_sanitized ) {
+						$value_matched = true;
+						break;
+					}
+				}
+
+				if ( ! $value_matched ) {
+					$raise_404 = true;
+				}
 			}
 		}
 
@@ -194,14 +195,9 @@ class CustomFieldsPermalink {
 	 * @return array
 	 */
 	public static function rewrite_rules_array_filter( $rules ) {
-		$keys  = array_keys( $rules );
-		$tmp   = $rules;
-		$rules = array();
+		$new_rules = array();
 
-		$j = sizeof( $keys );
-		for ( $i = 0; $i < $j; ++ $i ) {
-			$key = $keys[ $i ];
-
+		foreach ( $rules as $key => $rule ) {
 			if ( preg_match( '/%field_([^%]*?)%/', $key ) ) {
 				$key_new = preg_replace(
 					'/%field_([^%]*?)%/',
@@ -210,19 +206,19 @@ class CustomFieldsPermalink {
 					// Detect them automatically and add next $matches indices.
 					$key
 				);
-				$rules[ $key_new ] = preg_replace(
+				$new_rules[ $key_new ] = preg_replace(
 					'/%field_([^%]*?)%/',
-					sprintf( '%s=$1&%s=', self::PARAM_CUSTOMFIELD_KEY, self::PARAM_CUSTOMFIELD_VALUE ),
+					sprintf( '%s[$1]=', self::PARAM_CUSTOMFIELD_PARAMES ),
 					// Here on the end will be pasted $matches[$i] from $keyNew,
 					// so we can grab it it the future in self::PARAM_CUSTOMFIELD_VALUE parameter.
-					$tmp[ $key ]
+					$rule
 				);
 			} else {
-				$rules[ $key ] = $tmp[ $key ];
+				$new_rules[ $key ] = $rule;
 			}
 		}
 
-		return $rules;
+		return $new_rules;
 	}
 
 	/**
