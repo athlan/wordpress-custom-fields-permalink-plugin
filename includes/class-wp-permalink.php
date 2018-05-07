@@ -72,8 +72,9 @@ class WP_Permalink {
 	 * @return string
 	 */
 	private function link_rewrite_fields( $permalink, $post ) {
-		$replace_callback = function ( $matches ) use ( &$post ) {
-			return $this->link_rewrite_fields_extract( $post, $matches[2] );
+		$that             = $this;
+		$replace_callback = function ( $matches ) use ( &$post, &$that ) {
+			return $that->link_rewrite_fields_extract( $post, $matches[2] );
 		};
 		return preg_replace_callback( '#(%field_(.*?)%)#', $replace_callback, $permalink );
 	}
