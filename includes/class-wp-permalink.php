@@ -87,7 +87,7 @@ class WP_Permalink {
 	 *
 	 * @return string
 	 */
-	private function link_rewrite_fields_extract( $post, $field_name ) {
+	public function link_rewrite_fields_extract( $post, $field_name ) {
 		$post_meta = $this->post_meta->get_post_meta( $post );
 		if ( ! isset( $post_meta[ $field_name ] ) ) {
 			return '';
