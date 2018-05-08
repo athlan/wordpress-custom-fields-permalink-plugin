@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <phpunit
-	bootstrap="test/bootstrap.php"
+	bootstrap="test/integration/bootstrap.php"
 	backupGlobals="false"
 	colors="true"
 	convertErrorsToExceptions="true"
@@ -9,7 +9,8 @@
 	>
 	<testsuites>
 		<testsuite>
-			<directory prefix="" suffix=".php">./test/suites/</directory>
+			<directory prefix="" suffix=".php">./test/unit/</directory>
+			<directory prefix="" suffix=".php">./test/integration/suites/</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
