@@ -23,7 +23,7 @@ require_once $_tests_dir . '/includes/functions.php';
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require __DIR__ . '/../wordpress-custom-fields-permalink-plugin.php';
+	require __DIR__ . '/../../wordpress-custom-fields-permalink-plugin.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 

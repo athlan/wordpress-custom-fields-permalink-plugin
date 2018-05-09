@@ -17,9 +17,11 @@
 
     <!-- excludes -->
     <rule ref="WordPress.Files.FileName.InvalidClassFileName">
-        <exclude-pattern>*/test/suites/*</exclude-pattern>
+        <exclude-pattern>*/test/integration/suites/*</exclude-pattern>
+        <exclude-pattern>*/test/unit/*</exclude-pattern>
     </rule>
     <rule ref="WordPress.Files.FileName.NotHyphenatedLowercase">
-        <exclude-pattern>*/test/suites/*</exclude-pattern>
+        <exclude-pattern>*/test/integration/suites/*</exclude-pattern>
+        <exclude-pattern>*/test/unit/*</exclude-pattern>
     </rule>
 </ruleset>

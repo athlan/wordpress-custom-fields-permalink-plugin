@@ -6,12 +6,35 @@
  */
 
 // Require main class.
-require 'class-customfieldspermalink.php';
+require 'class-wp-post-meta.php';
+require 'class-wp-permalink.php';
+require 'class-wp-request-processor.php';
+require 'class-wp-rewrite-rules.php';
+require 'class-plugin-updater.php';
 
-add_filter( 'pre_post_link', array( 'CustomFieldsPermalink', 'link_post' ), 100, 3 );
-add_filter( 'post_type_link', array( 'CustomFieldsPermalink', 'link_post_type' ), 100, 4 );
-add_filter( 'rewrite_rules_array', array( 'CustomFieldsPermalink', 'rewrite_rules_array_filter' ) );
-add_filter( 'query_vars', array( 'CustomFieldsPermalink', 'register_extra_query_vars' ), 10, 1 );
-add_filter( 'request', array( 'CustomFieldsPermalink', 'process_request' ), 10, 1 );
-add_filter( 'pre_handle_404', array( 'CustomFieldsPermalink', 'pre_handle_404' ), 10, 2 );
-add_action( 'init', array( 'CustomFieldsPermalink', 'on_init' ) );
+use CustomFieldsPermalink\Plugin_Updater;
+use CustomFieldsPermalink\WP_Permalink;
+use CustomFieldsPermalink\WP_Post_Meta;
+use CustomFieldsPermalink\WP_Request_Processor;
+use CustomFieldsPermalink\WP_Rewrite_Rules;
+
+$post_meta = new WP_Post_Meta();
+
+// Permalink generation.
+$permalink = new WP_Permalink( $post_meta );
+add_filter( 'pre_post_link', array( $permalink, 'link_post' ), 100, 3 );
+add_filter( 'post_type_link', array( $permalink, 'link_post_type' ), 100, 4 );
+
+// Request processing.
+$request_processor = new WP_Request_Processor( $post_meta );
+add_filter( 'query_vars', array( $request_processor, 'register_extra_query_vars' ), 10, 1 );
+add_filter( 'request', array( $request_processor, 'process_request' ), 10, 1 );
+add_filter( 'pre_handle_404', array( $request_processor, 'pre_handle_404' ), 10, 2 );
+
+// Manage rewrite rules.
+$rules_rewriter = new WP_Rewrite_Rules();
+add_filter( 'rewrite_rules_array', array( $rules_rewriter, 'rewrite_rules_array_filter' ) );
+
+// Manage plugin updates.
+$plugin_updater = new Plugin_Updater();
+add_action( 'init', array( $plugin_updater, 'on_init_hook' ) );

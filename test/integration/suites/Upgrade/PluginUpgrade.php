@@ -5,6 +5,8 @@
  * @package WordPress_Custom_Fields_Permalink
  */
 
+use CustomFieldsPermalink\Plugin_Updater;
+
 /**
  * Class PluginUpgrade
  */
@@ -17,11 +19,12 @@ class PluginUpgrade extends BaseTestCase {
 		// given.
 		global $wp_rewrite;
 
+		$plugin_updater = new Plugin_Updater();
 		$this->given_stored_plugin_version( null );
 		$this->given_rewrite_rules_are_corrupted();
 
 		// when.
-		CustomFieldsPermalink::on_init();
+		$plugin_updater->on_init_hook();
 
 		// then.
 		$rules = $wp_rewrite->wp_rewrite_rules();
