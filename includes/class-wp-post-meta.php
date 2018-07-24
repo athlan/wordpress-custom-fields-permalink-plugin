@@ -67,8 +67,8 @@ class WP_Post_Meta {
 		 *
 		 * @since 1.4.0
 		 *
+		 * @param array|null  $values      The metadata values returned from get_post_meta.
 		 * @param string      $field_name  Name of metadata field.
-		 * @param string|null $value       The metadata value returned from get_post_meta.
 		 * @param array       $field_attr  The metadata field rewrite permalink attributes.
 		 * @param WP_Post     $post        The post object.
 		 */

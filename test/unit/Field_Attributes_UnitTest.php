@@ -17,15 +17,15 @@ class Field_Attributes_UnitTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_parses_single_attribute_without_value() {
 		// given.
-		$field_attributes = new Field_Attributes();
-		$attributes_string = "attr_one";
+		$field_attributes  = new Field_Attributes();
+		$attributes_string = 'attr_one';
 
 		// when.
-		$attributes = $field_attributes->parse_attributes($attributes_string);
+		$attributes = $field_attributes->parse_attributes( $attributes_string );
 
 		// then no exception.
-		$this->assertArrayHasKey( "attr_one", $attributes );
-		$this->assertTrue( $attributes["attr_one"] === true );
+		$this->assertArrayHasKey( 'attr_one', $attributes );
+		$this->assertTrue( true === $attributes['attr_one'] );
 	}
 
 	/**
@@ -33,15 +33,15 @@ class Field_Attributes_UnitTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_parses_single_attribute_with_value() {
 		// given.
-		$field_attributes = new Field_Attributes();
-		$attributes_string = "attr_one=value1";
+		$field_attributes  = new Field_Attributes();
+		$attributes_string = 'attr_one=value1';
 
 		// when.
-		$attributes = $field_attributes->parse_attributes($attributes_string);
+		$attributes = $field_attributes->parse_attributes( $attributes_string );
 
 		// then no exception.
-		$this->assertArrayHasKey( "attr_one", $attributes );
-		$this->assertTrue( $attributes["attr_one"] === "value1" );
+		$this->assertArrayHasKey( 'attr_one', $attributes );
+		$this->assertTrue( 'value1' === $attributes['attr_one'] );
 	}
 
 	/**
@@ -49,18 +49,18 @@ class Field_Attributes_UnitTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_parses_multiple_attributes() {
 		// given.
-		$field_attributes = new Field_Attributes();
-		$attributes_string = "attr_one attr_two=value2 attr_three";
+		$field_attributes  = new Field_Attributes();
+		$attributes_string = 'attr_one attr_two=value2 attr_three';
 
 		// when.
-		$attributes = $field_attributes->parse_attributes($attributes_string);
+		$attributes = $field_attributes->parse_attributes( $attributes_string );
 
 		// then no exception.
-		$this->assertArrayHasKey( "attr_one", $attributes );
-		$this->assertArrayHasKey( "attr_two", $attributes );
-		$this->assertArrayHasKey( "attr_three", $attributes );
-		$this->assertTrue( $attributes["attr_one"] === true );
-		$this->assertTrue( $attributes["attr_two"] === "value2" );
-		$this->assertTrue( $attributes["attr_three"] === true );
+		$this->assertArrayHasKey( 'attr_one', $attributes );
+		$this->assertArrayHasKey( 'attr_two', $attributes );
+		$this->assertArrayHasKey( 'attr_three', $attributes );
+		$this->assertTrue( true === $attributes['attr_one'] );
+		$this->assertTrue( 'value2' === $attributes['attr_two'] );
+		$this->assertTrue( true === $attributes['attr_three'] );
 	}
 }

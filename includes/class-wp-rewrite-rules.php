@@ -17,15 +17,15 @@ class WP_Rewrite_Rules {
 	 *
 	 * Samples:
 	 * 1) /permalink/%field_one%/
-	 * 2) /permalink/%field_one[attr1 attr2]%/
-	 * 3) /permalink/%field_one [attr1 attr2]%/
+	 * 2) /permalink/%field_one(attr1 attr2)%/
+	 * 3) /permalink/%field_one (attr1 attr2)%/
 	 *
 	 * Groups:
 	 * 1. Field name
 	 * 2. Existence of attributes section
 	 * 3. Attributes section
 	 */
-	const FIELD_REGEXP = '%field_([^%]*?)(\s*?\[(.*)\])?%';
+	const FIELD_REGEXP = '%field_([^%]*?)(\s*?\((.*)\))?%';
 
 	const FIELD_REGEXP_MAIN_GROUP       = 0;
 	const FIELD_REGEXP_NAME_GROUP       = 1;
