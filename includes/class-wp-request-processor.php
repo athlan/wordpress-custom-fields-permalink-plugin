@@ -14,7 +14,8 @@ use WP_Query;
  */
 class WP_Request_Processor {
 
-	const PARAM_CUSTOMFIELD_PARAMES = 'custom_field_params';
+	const PARAM_CUSTOMFIELD_PARAMS      = 'custom_field_params';
+	const PARAM_CUSTOMFIELD_PARAMS_ATTR = 'custom_field_params_attr';
 
 	/**
 	 * Post meta provider.
@@ -43,7 +44,7 @@ class WP_Request_Processor {
 	 * @return mixed
 	 */
 	public function register_extra_query_vars( $public_query_vars ) {
-		array_push( $public_query_vars, self::PARAM_CUSTOMFIELD_PARAMES );
+		array_push( $public_query_vars, self::PARAM_CUSTOMFIELD_PARAMS, self::PARAM_CUSTOMFIELD_PARAMS_ATTR );
 
 		return $public_query_vars;
 	}
@@ -71,7 +72,7 @@ class WP_Request_Processor {
 	 * 1. Custom field key does not exists or
 	 * 2. Custom field value does not matches.
 	 *
-	 * @param bool     $preempt  Whether to short-circuit default header status handling. Default false.
+	 * @param bool     $preempt Whether to short-circuit default header status handling. Default false.
 	 * @param WP_Query $wp_query WordPress Query object.
 	 *
 	 * @return bool Returning a non-false value from the filter will short-circuit the handling
@@ -88,25 +89,33 @@ class WP_Request_Processor {
 		$post = $wp_query->post;
 
 		// Analyse only if custom field used in query.
-		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_PARAMES, $wp_query->query_vars )
-			|| ! is_array( $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMES ] ) ) {
+		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_PARAMS, $wp_query->query_vars )
+			|| ! is_array( $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMS ] )
+		) {
 			return false;
 		}
 
-		$query_meta_params = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMES ];
+		$query_meta_params      = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMS ];
+		$query_meta_params_attr = $this->get_param_attr( $wp_query );
 
 		$raise_404 = false;
 
-		$post_meta = $this->post_meta->get_post_meta( $post );
-
 		foreach ( $query_meta_params as $query_meta_key => $query_meta_value ) {
-			if ( ! array_key_exists( $query_meta_key, $post_meta ) ) {
+			if ( array_key_exists( $query_meta_key, $query_meta_params_attr ) ) {
+				$field_attr = $query_meta_params_attr[ $query_meta_key ];
+			} else {
+				$field_attr = array();
+			}
+
+			$post_meta_values = $this->post_meta->get_post_meta_single( $post, $query_meta_key, $field_attr );
+
+			if ( null === $post_meta_values || ! $post_meta_values ) {
 				$raise_404 = true;
 				break;
 			} else {
 				// Look for at least one value match.
 				$value_matched = false;
-				foreach ( $post_meta[ $query_meta_key ] as $post_meta_value ) {
+				foreach ( $post_meta_values as $post_meta_value ) {
 					$post_meta_value_sanitized = sanitize_title( $post_meta_value );
 
 					if ( $query_meta_value == $post_meta_value_sanitized ) {
@@ -131,5 +140,34 @@ class WP_Request_Processor {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Gets custom fields parameters attributes from WP_Query.
+	 *
+	 * @param WP_Query $wp_query WordPress Query object.
+	 *
+	 * @access private
+	 * @return array
+	 */
+	private function get_param_attr( WP_Query $wp_query ) {
+		if ( ! isset( $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMS_ATTR ] ) ) {
+			return array();
+		}
+
+		$attrs                  = array();
+		$query_meta_params_attr = $wp_query->query_vars[ self::PARAM_CUSTOMFIELD_PARAMS_ATTR ];
+
+		foreach ( $query_meta_params_attr as $attr_field_and_key => $attr_value ) {
+			list( $field_name, $field_attr_name ) = explode( '::', $attr_field_and_key );
+
+			if ( ! array_key_exists( $field_name, $attrs ) ) {
+				$attrs[ $field_name ] = array();
+			}
+
+			$attrs[ $field_name ][ $field_attr_name ] = $attr_value;
+		}
+
+		return $attrs;
 	}
 }

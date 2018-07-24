@@ -40,6 +40,46 @@ class WP_Post_Meta {
 				$value = array( $value );
 			}
 		}
+
 		return $filtered_post_meta;
+	}
+
+	/**
+	 * Get single post meta applying <code>wpcfp_get_post_metadata_single</code> filter.
+	 *
+	 * @param WP_Post $post        The post.
+	 * @param string  $field_name  Name of metadata field.
+	 * @param array   $field_attr  The metadata field rewrite permalink attributes.
+	 *
+	 * @return array
+	 */
+	public function get_post_meta_single( $post, $field_name, array $field_attr ) {
+		$post_meta = $this->get_post_meta( $post );
+
+		if ( array_key_exists( $field_name, $post_meta ) ) {
+			$values = $post_meta[ $field_name ];
+		} else {
+			$values = null;
+		}
+
+		/**
+		 * Filters of retrieved single metadata of a post to link rewrite.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param string      $field_name  Name of metadata field.
+		 * @param string|null $value       The metadata value returned from get_post_meta.
+		 * @param array       $field_attr  The metadata field rewrite permalink attributes.
+		 * @param WP_Post     $post        The post object.
+		 */
+		$filtered_value = apply_filters( 'wpcfp_get_post_metadata_single', $values, $field_name, $field_attr, $post );
+		// Do some fixes after user generated values.
+		// If it's single value, wrap this in array, as WordPress internally does.
+		// @see get_post_meta() with $single = false.
+		if ( ! is_array( $filtered_value ) ) {
+			$filtered_value = array( $filtered_value );
+		}
+
+		return $filtered_value;
 	}
 }
