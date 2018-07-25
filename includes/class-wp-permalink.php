@@ -82,11 +82,12 @@ class WP_Permalink {
 	 */
 	private function link_rewrite_fields( $permalink, $post ) {
 		$that             = $this;
-		$replace_callback = function ( $matches ) use ( &$post, &$that ) {
+		$field_attributes = $this->field_attributes;
+		$replace_callback = function ( $matches ) use ( &$post, &$that, &$field_attributes ) {
 			$field_name = $matches[ WP_Rewrite_Rules::FIELD_REGEXP_NAME_GROUP ];
 
 			if ( isset( $matches[ WP_Rewrite_Rules::FIELD_REGEXP_ATTRIBUTES_GROUP ] ) ) {
-				$field_attr = $that->field_attributes->parse_attributes( $matches[ WP_Rewrite_Rules::FIELD_REGEXP_ATTRIBUTES_GROUP ] );
+				$field_attr = $field_attributes->parse_attributes( $matches[ WP_Rewrite_Rules::FIELD_REGEXP_ATTRIBUTES_GROUP ] );
 			} else {
 				$field_attr = array();
 			}
