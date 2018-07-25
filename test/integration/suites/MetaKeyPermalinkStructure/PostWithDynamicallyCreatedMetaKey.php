@@ -8,6 +8,7 @@
 namespace CustomFieldsPermalink\Tests\Integration\MetaKeyPermalinkStructure;
 
 use BaseTestCase;
+use WP_Post;
 
 /**
  * Class PostWithDynamicallyCreatedMetaKey

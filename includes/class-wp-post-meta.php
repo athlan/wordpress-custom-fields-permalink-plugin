@@ -47,19 +47,19 @@ class WP_Post_Meta {
 	/**
 	 * Get single post meta applying <code>wpcfp_get_post_metadata_single</code> filter.
 	 *
-	 * @param WP_Post $post        The post.
-	 * @param string  $field_name  Name of metadata field.
-	 * @param array   $field_attr  The metadata field rewrite permalink attributes.
+	 * @param WP_Post $post            The post.
+	 * @param string  $meta_key        Name of metadata field.
+	 * @param array   $meta_key_attrs  The metadata field rewrite permalink attributes.
 	 *
 	 * @return array
 	 */
-	public function get_post_meta_single( $post, $field_name, array $field_attr ) {
+	public function get_post_meta_single( $post, $meta_key, array $meta_key_attrs ) {
 		$post_meta = $this->get_post_meta( $post );
 
-		if ( array_key_exists( $field_name, $post_meta ) ) {
-			$values = $post_meta[ $field_name ];
+		if ( array_key_exists( $meta_key, $post_meta ) ) {
+			$post_meta_value = $post_meta[ $meta_key ];
 		} else {
-			$values = null;
+			$post_meta_value = null;
 		}
 
 		/**
@@ -67,23 +67,23 @@ class WP_Post_Meta {
 		 *
 		 * @since 1.4.0
 		 *
-		 * @param mixed|null $values      The metadata values returned from get_post_meta.
-		 * @param string     $field_name  Name of metadata field.
-		 * @param array      $field_attr  The metadata field rewrite permalink attributes.
-		 * @param WP_Post    $post        The post object.
+		 * @param mixed|null $post_meta_value  The metadata values returned from get_post_meta.
+		 * @param string     $meta_key         Name of metadata field.
+		 * @param array      $meta_key_attrs   The metadata field rewrite permalink attributes.
+		 * @param WP_Post    $post             The post object.
 		 */
-		$filtered_value = apply_filters( 'wpcfp_get_post_metadata_single', $values, $field_name, $field_attr, $post );
-		if ( null === $filtered_value ) {
+		$filtered_post_meta_value = apply_filters( 'wpcfp_get_post_metadata_single', $post_meta_value, $meta_key, $meta_key_attrs, $post );
+		if ( null === $filtered_post_meta_value ) {
 			return null;
 		}
 
 		// Do some fixes after user generated values.
 		// If it's single value, wrap this in array, as WordPress internally does.
 		// @see get_post_meta() with $single = false.
-		if ( ! is_array( $filtered_value ) ) {
-			$filtered_value = array( $filtered_value );
+		if ( ! is_array( $filtered_post_meta_value ) ) {
+			$filtered_post_meta_value = array( $filtered_post_meta_value );
 		}
 
-		return $filtered_value;
+		return $filtered_post_meta_value;
 	}
 }

@@ -25,22 +25,22 @@ class PostWithMetaKey extends BaseTestCase {
 	/**
 	 * Sample custom metadata filter that adds some metadata to the array.
 	 *
-	 * @param mixed|null $values The metadata values returned from get_post_meta.
-	 * @param string     $field_name Name of metadata field.
-	 * @param array      $field_attr The metadata field rewrite permalink attributes.
-	 * @param WP_Post    $post The post object.
+	 * @param mixed|null $post_meta_value  The metadata values returned from get_post_meta.
+	 * @param string     $meta_key         Name of metadata field.
+	 * @param array      $meta_key_attrs   The metadata field rewrite permalink attributes.
+	 * @param WP_Post    $post             The post object.
 	 *
 	 * @return mixed original values
 	 */
-	function get_post_metadata_single( $values, $field_name, $field_attr, $post ) {
-		$this->hook_calls[ $field_name ] = array(
-			'values'     => $values,
-			'field_name' => $field_name,
-			'field_attr' => $field_attr,
-			'post'       => $post,
+	function get_post_metadata_single( $post_meta_value, $meta_key, $meta_key_attrs, $post ) {
+		$this->hook_calls[ $meta_key ] = array(
+			'post_meta_value' => $post_meta_value,
+			'meta_key'        => $meta_key,
+			'meta_key_attrs'  => $meta_key_attrs,
+			'post'            => $post,
 		);
 
-		return $values;
+		return $post_meta_value;
 	}
 
 	/**
@@ -122,8 +122,8 @@ class PostWithMetaKey extends BaseTestCase {
 		$this->assertArrayHasKey( $field_name, $this->hook_calls );
 
 		$hook_call = $this->hook_calls[ $field_name ];
-		$this->assertTrue( $hook_call['values'][0] === $value );
-		$this->assertTrue( $hook_call['field_attr'] == $field_attr );
+		$this->assertTrue( $hook_call['post_meta_value'][0] === $value );
+		$this->assertTrue( $hook_call['meta_key_attrs'] == $field_attr );
 		$this->assertTrue( $hook_call['post']->ID === $post_id );
 	}
 

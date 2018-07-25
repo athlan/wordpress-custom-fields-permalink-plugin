@@ -102,7 +102,7 @@ class WP_Rewrite_Rules {
 	 * @return string The rewrite rule replacement.
 	 */
 	private function build_rule_on_field_match( $key_matches, $i ) {
-		$field_name = $key_matches[ self::FIELD_REGEXP_NAME_GROUP ][ $i ];
+		$field_name       = $key_matches[ self::FIELD_REGEXP_NAME_GROUP ][ $i ];
 		$field_attributes = $this->field_attributes->parse_attributes( $key_matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ][ $i ] );
 
 		$rule_rewrite = array();

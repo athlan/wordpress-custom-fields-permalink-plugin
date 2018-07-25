@@ -18,15 +18,15 @@ class PostWithDynamicallyCreatedSingleMetaKey extends BaseTestCase {
 	/**
 	 * Sample custom metadata filter that adds some metadata to the array.
 	 *
-	 * @param mixed|null $values The metadata values returned from get_post_meta.
-	 * @param string     $field_name Name of metadata field.
-	 * @param array      $field_attr The metadata field rewrite permalink attributes.
-	 * @param WP_Post    $post The post object.
+	 * @param mixed|null $post_meta_value  The metadata values returned from get_post_meta.
+	 * @param string     $meta_key         Name of metadata field.
+	 * @param array      $meta_key_attrs   The metadata field rewrite permalink attributes.
+	 * @param WP_Post    $post             The post object.
 	 *
 	 * @return mixed original values
 	 */
-	function get_post_metadata_single( $values, $field_name, $field_attr, $post ) {
-		if ($field_name === 'some_meta_key') {
+	function get_post_metadata_single( $post_meta_value, $meta_key, $meta_key_attrs, $post ) {
+		if ( 'some_meta_key' === $meta_key ) {
 			return 'default-value';
 		}
 
