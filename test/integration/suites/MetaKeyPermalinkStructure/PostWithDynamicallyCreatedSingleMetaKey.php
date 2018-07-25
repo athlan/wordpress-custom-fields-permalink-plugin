@@ -16,16 +16,14 @@ use WP_Post;
 class PostWithDynamicallyCreatedSingleMetaKey extends BaseTestCase {
 
 	/**
-	 * Filters of retrieved single metadata of a post to link rewrite.
+	 * Sample custom metadata filter that adds some metadata to the array.
 	 *
-	 * @since 1.4.0
-	 *
-	 * @param array|null $values The metadata values returned from get_post_meta.
+	 * @param mixed|null $values The metadata values returned from get_post_meta.
 	 * @param string     $field_name Name of metadata field.
 	 * @param array      $field_attr The metadata field rewrite permalink attributes.
 	 * @param WP_Post    $post The post object.
 	 *
-	 * @return array original values
+	 * @return mixed original values
 	 */
 	function get_post_metadata_single( $values, $field_name, $field_attr, $post ) {
 		if ($field_name === 'some_meta_key') {

@@ -67,16 +67,16 @@ class WP_Post_Meta {
 		 *
 		 * @since 1.4.0
 		 *
-		 * @param array|null  $values      The metadata values returned from get_post_meta.
-		 * @param string      $field_name  Name of metadata field.
-		 * @param array       $field_attr  The metadata field rewrite permalink attributes.
-		 * @param WP_Post     $post        The post object.
+		 * @param mixed|null $values      The metadata values returned from get_post_meta.
+		 * @param string     $field_name  Name of metadata field.
+		 * @param array      $field_attr  The metadata field rewrite permalink attributes.
+		 * @param WP_Post    $post        The post object.
 		 */
 		$filtered_value = apply_filters( 'wpcfp_get_post_metadata_single', $values, $field_name, $field_attr, $post );
 		if ( null === $filtered_value ) {
 			return null;
 		}
-		
+
 		// Do some fixes after user generated values.
 		// If it's single value, wrap this in array, as WordPress internally does.
 		// @see get_post_meta() with $single = false.
