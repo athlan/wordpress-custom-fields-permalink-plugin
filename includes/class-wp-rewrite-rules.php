@@ -103,12 +103,8 @@ class WP_Rewrite_Rules {
 	 */
 	private function build_rule_on_field_match( $key_matches, $i ) {
 		$field_name = $key_matches[ self::FIELD_REGEXP_NAME_GROUP ][ $i ];
+		$field_attributes = $this->field_attributes->parse_attributes( $key_matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ][ $i ] );
 
-		if ( isset( $key_matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ][ $i ] ) ) {
-			$field_attributes = $this->field_attributes->parse_attributes( $key_matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ][ $i ] );
-		} else {
-			$field_attributes = array();
-		}
 		$rule_rewrite = array();
 		$rule_rewrite[ WP_Request_Processor::PARAM_CUSTOMFIELD_PARAMS_ATTR ] = array();
 		$rule_rewrite[ WP_Request_Processor::PARAM_CUSTOMFIELD_PARAMS ]      = array();
