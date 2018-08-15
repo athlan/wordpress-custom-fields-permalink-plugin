@@ -15,4 +15,4 @@
 
 // Require main entry point.
 define( 'WORDPRESS_CUSTOM_FIELDS_PERMALINK_PLUGIN_VERSION', '1.3.0' );
-require 'includes/main.php';
+require __DIR__ . '/includes/main.php';
