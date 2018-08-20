@@ -93,6 +93,27 @@ class WP_Rewrite_Rules {
 	}
 
 	/**
+	 * Fixes the permalink structure option which encodes as url the field definition.
+	 *
+	 * @param mixed $new_value The new value.
+	 *
+	 * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/pre_update_option_(option_name)
+	 * @see WP_Rewrite::set_permalink_structure()
+	 *
+	 * @return mixed
+	 */
+	public function permalink_structure_option_filter( $new_value ) {
+		preg_match( '/' . self::FIELD_REGEXP . '/', $new_value, $matches );
+
+		if ( isset( $matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ] ) ) {
+			$new_value_filtered = str_replace( $matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ], urldecode( $matches[ self::FIELD_REGEXP_ATTRIBUTES_GROUP ] ), $new_value );
+			return $new_value_filtered;
+		} else {
+			return $new_value;
+		}
+	}
+
+	/**
 	 * Builds the part of rewrite rule replacement based on parameter match and its attributes.
 	 *
 	 * @param array   $key_matches All found matches.

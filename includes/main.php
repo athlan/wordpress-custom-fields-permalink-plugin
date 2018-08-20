@@ -37,6 +37,7 @@ add_filter( 'pre_handle_404', array( $request_processor, 'pre_handle_404' ), 10,
 // Manage rewrite rules.
 $rules_rewriter = new WP_Rewrite_Rules( $field_attributes );
 add_filter( 'rewrite_rules_array', array( $rules_rewriter, 'rewrite_rules_array_filter' ) );
+add_filter( 'pre_update_option_permalink_structure', array( $rules_rewriter, 'permalink_structure_option_filter' ) );
 
 // Manage plugin updates.
 $plugin_updater = new Plugin_Updater();

@@ -111,6 +111,40 @@ class PostWithMetaKey extends BaseTestCase {
 	}
 
 	/**
+	 * Test case.
+	 */
+	function test_go_to_post_using_meta_key_permalink_structure_multiple_attributes() {
+		// given.
+		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key(some_attribute some_second_attribute=\'some value\')%/%postname%/' );
+		$this->given_hook_registered();
+
+		$post_params     = array(
+			'post_title' => 'Some post title',
+			'meta_input' => array(
+				'some_meta_key'       => 'Some meta value',
+				'some_other_meta_key' => 'Some other meta value',
+			),
+		);
+		$created_post_id = $this->factory()->post->create( $post_params );
+
+		// when.
+		$this->go_to( '/some-meta-value/some-post-title/' );
+
+		// then.
+		$this->navigation_asserter->then_displayed_post( $created_post_id );
+
+		$this->assertThatHookWasCalledWith(
+			'some_meta_key', 'Some meta value',
+			array(
+				'some_attribute'        => true,
+				'some_second_attribute' => 'some value',
+			),
+			$created_post_id
+		);
+		$this->assertThatHookWasNotCalledForField( 'some_other_meta_key' );
+	}
+
+	/**
 	 * Asserter.
 	 *
 	 * @param string     $field_name Name of metadata field.
