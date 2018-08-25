@@ -11,31 +11,33 @@ use BaseTestCase;
 use WP_Post;
 
 /**
- * Class PostWithDynamicallyCreatedMetaKey
+ * Class PostWithDynamicallyCreatedSingleMetaKey
  */
-class PostWithDynamicallyCreatedMetaKey extends BaseTestCase {
+class PostWithDynamicallyCreatedSingleMetaKey extends BaseTestCase {
 
 	/**
 	 * Sample custom metadata filter that adds some metadata to the array.
 	 *
-	 * @param array   $post_meta  The metadata returned from get_post_meta.
-	 * @param WP_Post $post       The post object.
+	 * @param mixed|null $post_meta_value  The metadata values returned from get_post_meta.
+	 * @param string     $meta_key         Name of metadata field.
+	 * @param array      $meta_key_attrs   The metadata field rewrite permalink attributes.
+	 * @param WP_Post    $post             The post object.
 	 *
-	 * @return array metadata
+	 * @return mixed original values
 	 */
-	function generate_dynamic_metadata( $post_meta = null, $post = null ) {
-		if ( ! array_key_exists( 'some_meta_key', $post_meta ) ) {
-			$post_meta['some_meta_key'] = 'Default value';
+	function get_post_metadata_single( $post_meta_value, $meta_key, $meta_key_attrs, $post ) {
+		if ( 'some_meta_key' === $meta_key ) {
+			return 'default-value';
 		}
 
-		return $post_meta;
+		return null;
 	}
 
 	/**
 	 * Test step that hook wpcfp_get_post_metadata has been registered.
 	 */
 	private function given_hook_registered() {
-		add_filter( 'wpcfp_get_post_metadata', array( $this, 'generate_dynamic_metadata' ), 1, 2 );
+		add_filter( 'wpcfp_get_post_metadata_single', array( $this, 'get_post_metadata_single' ), 1, 4 );
 	}
 
 	/**

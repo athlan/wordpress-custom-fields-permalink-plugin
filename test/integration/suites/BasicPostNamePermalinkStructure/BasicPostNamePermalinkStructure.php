@@ -5,6 +5,10 @@
  * @package WordPress_Custom_Fields_Permalink
  */
 
+namespace CustomFieldsPermalink\Tests\Integration\BasicPostNamePermalinkStructure;
+
+use BaseTestCase;
+
 /**
  * Class BasicPostNamePermalinkStructure
  */

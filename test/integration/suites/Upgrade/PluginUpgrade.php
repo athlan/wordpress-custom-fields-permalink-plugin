@@ -5,6 +5,9 @@
  * @package WordPress_Custom_Fields_Permalink
  */
 
+namespace CustomFieldsPermalink\Tests\Integration\Upgrade;
+
+use BaseTestCase;
 use CustomFieldsPermalink\Plugin_Updater;
 
 /**

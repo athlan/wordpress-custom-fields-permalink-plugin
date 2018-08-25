@@ -26,6 +26,13 @@ class PermalinkSteps {
 
 		$wp_rewrite->init();
 		$wp_rewrite->set_permalink_structure( $structure );
+
+		/*
+		 * Fix the WordPress bug that ignores previously filtered formatted updated option
+		 * once it is new one during the addition. Submit the option twice.
+		 */
+		$wp_rewrite->set_permalink_structure( $structure );
+
 		$wp_rewrite->flush_rules();
 	}
 

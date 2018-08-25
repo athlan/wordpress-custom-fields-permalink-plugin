@@ -5,6 +5,10 @@
  * @package WordPress_Custom_Fields_Permalink
  */
 
+namespace CustomFieldsPermalink\Tests\Integration\MetaKeyPermalinkStructure;
+
+use BaseTestCase;
+
 /**
  * Class PostWithMissingMetaKey
  */
@@ -17,7 +21,7 @@ class PostWithMissingMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = array(
+		$post_params = array(
 			'post_title' => 'Some post title',
 			'meta_input' => array(
 				// There is missing meta key here
@@ -37,7 +41,7 @@ class PostWithMissingMetaKey extends BaseTestCase {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
-		$post_params     = array(
+		$post_params = array(
 			'post_title' => 'Some post title',
 			'meta_input' => array(
 				// There is missing meta key here
