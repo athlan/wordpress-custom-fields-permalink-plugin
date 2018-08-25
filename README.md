@@ -5,18 +5,6 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 [![Build Status](https://travis-ci.org/athlan/wordpress-custom-fields-permalink-plugin.svg?branch=master)](https://travis-ci.org/athlan/wordpress-custom-fields-permalink-plugin)
 [![codecov](https://codecov.io/gh/athlan/wordpress-custom-fields-permalink-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/athlan/wordpress-custom-fields-permalink-plugin)
 
----
-
-* Contributors: <a href="https://github.com/athlan">athlan</a>
-* Plugin url: [http://athlan.pl/wordpres-custom-fields-permalink-plugin/](http://athlan.pl/wordpres-custom-fields-permalink-plugin/)
-* Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
-* Requires at least: 4.5.0
-* Tested up to: 4.9.5
-* Stable tag: 1.3.0
-* Requires PHP: 5.3
-* License: MIT
-* License URI: http://opensource.org/licenses/MIT
-
 ## Description
 
 Plugin allows to use post's custom fields values in permalink structure by adding `%field_fieldname%` rewrite tag.
@@ -43,6 +31,14 @@ Plugin is also avaliable on GitHub:
 
 Search for **Custom Fields Permalink 2** or follow the link
 https://wordpress.org/plugins/custom-fields-permalink-redux/
+
+## Extensions
+
+### Advanced Cutom Fields
+
+The extension of this plugin to fully support ACF plugin is availiable:
+
+https://github.com/athlan/acf-permalink
 
 ## Changelog
 
