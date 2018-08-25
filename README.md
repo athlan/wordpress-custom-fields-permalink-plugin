@@ -12,7 +12,7 @@ Plugin allows to use post's custom fields values in permalink structure by addin
 * Tags: custom fields, permalinks, permalink, url, custom post types, post type, tax, taxonomy, types
 * Requires at least: 4.5.0
 * Tested up to: 4.9.5
-* Stable tag: 1.3.0
+* Stable tag: 1.4.0
 * Requires PHP: 5.3
 * License: MIT
 * License URI: http://opensource.org/licenses/MIT
