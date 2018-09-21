@@ -72,7 +72,8 @@ class PostWithMetaKey extends BaseTestCase {
 		$this->permalink_asserter->has_permalink( $created_post_id, '/some-meta-value/some-post-title/' );
 
 		$this->assertThatHookWasCalledWith(
-			'some_meta_key', 'Some meta value',
+			'some_meta_key',
+			'Some meta value',
 			array( 'some_attribute' => true ),
 			$created_post_id
 		);
@@ -103,7 +104,8 @@ class PostWithMetaKey extends BaseTestCase {
 		$this->navigation_asserter->then_displayed_post( $created_post_id );
 
 		$this->assertThatHookWasCalledWith(
-			'some_meta_key', 'Some meta value',
+			'some_meta_key',
+			'Some meta value',
 			array( 'some_attribute' => true ),
 			$created_post_id
 		);
@@ -134,7 +136,8 @@ class PostWithMetaKey extends BaseTestCase {
 		$this->navigation_asserter->then_displayed_post( $created_post_id );
 
 		$this->assertThatHookWasCalledWith(
-			'some_meta_key', 'Some meta value',
+			'some_meta_key',
+			'Some meta value',
 			array(
 				'some_attribute'        => true,
 				'some_second_attribute' => 'some value',
