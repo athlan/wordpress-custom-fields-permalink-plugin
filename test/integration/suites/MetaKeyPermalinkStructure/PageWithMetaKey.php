@@ -41,7 +41,7 @@ class PageWithMetaKey extends BaseTestCase {
 	/**
 	 * Test case.
 	 */
-	function IGNORE_test_go_to_page_not_using_meta_key_permalink_structure() {
+	function test_go_to_page_not_using_meta_key_permalink_structure() {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 

@@ -62,6 +62,10 @@ class WP_Rewrite_Rules {
 
 		foreach ( $rules as $key => $rule ) {
 			if ( preg_match_all( '/' . self::FIELD_REGEXP . '/', $key, $key_matches ) ) {
+				if ( $this->conflicts_with_page_permalink( $key, $key_matches ) ) {
+					continue;
+				}
+
 				$key_new = preg_replace(
 					'/' . self::FIELD_REGEXP . '/',
 					'([^/]+)',
@@ -139,5 +143,23 @@ class WP_Rewrite_Rules {
 		$rule_rewrite[ WP_Request_Processor::PARAM_CUSTOMFIELD_PARAMS ][ $field_name ] = '';
 
 		return http_build_query( $rule_rewrite );
+	}
+
+	/**
+	 * Determines if rewrite rule contains only custom field tag and conflicts with pages permalink.
+	 *
+	 * @param string $key Rewrite rule.
+	 * @param array  $key_matches All found matches.
+	 *
+	 * @access private
+	 * @return boolean Whether rewrite rule conflicts with page rule.
+	 */
+	private function conflicts_with_page_permalink( $key, $key_matches ) {
+		if ( count( $key_matches[ self::FIELD_REGEXP_MAIN_GROUP ] ) == 1 ) {
+			// If the rewrite rule is only %field_some%/?$ it will be in conflict with pages rewrite rule.
+			return preg_match( '/^' . self::FIELD_REGEXP . '\/\?\$$/', $key );
+		}
+
+		return false;
 	}
 }
