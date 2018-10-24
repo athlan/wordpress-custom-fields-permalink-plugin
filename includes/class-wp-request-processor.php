@@ -87,6 +87,9 @@ class WP_Request_Processor {
 		}
 
 		$post = $wp_query->post;
+		if ( null === $post ) {
+			return false;
+		}
 
 		// Analyse only if custom field used in query.
 		if ( ! array_key_exists( self::PARAM_CUSTOMFIELD_PARAMS, $wp_query->query_vars )

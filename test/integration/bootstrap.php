@@ -33,6 +33,7 @@ require $_tests_dir . '/includes/bootstrap.php';
 require 'class-basetestcase.php';
 require 'class-permalinksteps.php';
 require 'class-customposttypesteps.php';
+require 'class-authsteps.php';
 require 'class-permalinkasserter.php';
 require 'class-navigationasserter.php';
 
