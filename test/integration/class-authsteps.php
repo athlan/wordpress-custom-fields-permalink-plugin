@@ -20,16 +20,10 @@ class AuthSteps {
 	 * Logged as given user and password.
 	 *
 	 * @param string $username User name.
-	 * @param string $password User password.
 	 * @throws Exception When authentication fails.
 	 */
-	public function given_logged_as( $username, $password ) {
-		$result = wp_signon(
-			array(
-				'user_login'    => $username,
-				'user_password' => $password,
-			)
-		);
+	public function given_logged_as( $username ) {
+		$result = get_user_by( 'login', $username );
 
 		if ( ! ( $result instanceof WP_User ) ) {
 			throw new Exception( "Couldn't login user" );
