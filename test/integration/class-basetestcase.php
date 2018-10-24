@@ -25,6 +25,13 @@ class BaseTestCase extends WP_UnitTestCase {
 	protected $custom_post_type_steps;
 
 	/**
+	 * The AuthSteps.
+	 *
+	 * @var AuthSteps
+	 */
+	protected $auth_steps;
+
+	/**
 	 * The PermalinkAsserter.
 	 *
 	 * @var PermalinkAsserter
@@ -46,6 +53,7 @@ class BaseTestCase extends WP_UnitTestCase {
 
 		$this->permalink_steps        = new PermalinkSteps( $this );
 		$this->custom_post_type_steps = new CustomPostTypeSteps( $this );
+		$this->auth_steps             = new AuthSteps( $this );
 		$this->permalink_asserter     = new PermalinkAsserter( $this );
 		$this->navigation_asserter    = new NavigationAsserter( $this );
 	}
