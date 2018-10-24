@@ -78,8 +78,6 @@ class PrivatePostWithMetaKey extends BaseTestCase {
 			),
 		);
 		$created_post_id = $this->factory()->post->create( $post_params );
-		var_dump( is_user_logged_in() );
-		var_dump( wp_get_current_user() );
 
 		// when.
 		$this->go_to( '/some-meta-value/some-post-title/' );
