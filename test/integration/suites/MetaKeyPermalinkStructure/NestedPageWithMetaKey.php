@@ -20,7 +20,7 @@ class NestedPageWithMetaKey extends BaseTestCase {
 	/**
 	 * Test case.
 	 */
-	function test_generates_permalink_to_page_not_using_meta_key() {
+	function test_generates_permalink_to_nested_page_not_using_meta_key() {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
@@ -52,7 +52,7 @@ class NestedPageWithMetaKey extends BaseTestCase {
 	/**
 	 * Test case.
 	 */
-	function test_go_to_page_not_using_meta_key_permalink_structure() {
+	function test_go_to_nested_page_not_using_meta_key_permalink_structure() {
 		// given.
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
