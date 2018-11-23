@@ -36,5 +36,6 @@ require 'class-customposttypesteps.php';
 require 'class-authsteps.php';
 require 'class-permalinkasserter.php';
 require 'class-navigationasserter.php';
+require 'class-experimentsteps.php';
 
 define( 'WP_RUN_CORE_TESTS', true );
