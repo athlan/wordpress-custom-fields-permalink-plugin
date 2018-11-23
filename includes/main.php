@@ -42,3 +42,5 @@ add_filter( 'pre_update_option_permalink_structure', array( $rules_rewriter, 'pe
 // Manage plugin updates.
 $plugin_updater = new Plugin_Updater();
 add_action( 'init', array( $plugin_updater, 'on_init_hook' ) );
+
+include 'experimental/main-experiments.php';
