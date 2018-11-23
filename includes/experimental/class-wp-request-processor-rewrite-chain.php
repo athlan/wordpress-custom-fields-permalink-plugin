@@ -49,10 +49,16 @@ class WP_Request_Processor_Rewrite_Chain {
 	 *
 	 * @param mixed $value Value of the option.
 	 *
+	 * @return mixed
+	 *
 	 * @link https://developer.wordpress.org/reference/hooks/option_option/
 	 */
 	public function option_rewrite_rules( $value ) {
-		$this->cached_rewrite_rules = $value;
+		if (is_array($value)) {
+			$this->cached_rewrite_rules = $value;
+		}
+
+		return $value;
 	}
 
 	/**
@@ -69,13 +75,16 @@ class WP_Request_Processor_Rewrite_Chain {
 	 *
 	 * @link https://developer.wordpress.org/reference/hooks/pre_handle_404/
 	 */
-	public function pre_handle_404( $preempt, $wp_query ) {
+	public function wpcfp_pre_raise_404( $preempt, $wp_query ) {
 		global $wp;
 
-		if ( $wp_query->query_vars[ WP_Request_Processor::PARAM_CUSTOMFIELD_PARAMS ] ) {
-			unset( $this->cached_rewrite_rules[ $wp->matched_rule ] );
-			$this->do_wp_again();
-			return false;
+		if ( array_key_exists(WP_Request_Processor::PARAM_CUSTOMFIELD_PARAMS, $wp_query->query_vars) && $wp->matched_rule ) {
+			if ($this->cached_rewrite_rules !== null) {
+				unset( $this->cached_rewrite_rules[ $wp->matched_rule ] );
+				$this->do_wp_again();
+
+				return false;
+			}
 		}
 
 		return true;
