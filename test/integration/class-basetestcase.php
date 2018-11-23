@@ -46,13 +46,6 @@ class BaseTestCase extends WP_UnitTestCase {
 	protected $navigation_asserter;
 
 	/**
-	 * The ExperimentSteps.
-	 *
-	 * @var ExperimentSteps
-	 */
-	protected $experiment_steps;
-
-	/**
 	 * Set up test.
 	 */
 	public function setUp() {
@@ -63,6 +56,5 @@ class BaseTestCase extends WP_UnitTestCase {
 		$this->auth_steps             = new AuthSteps( $this );
 		$this->permalink_asserter     = new PermalinkAsserter( $this );
 		$this->navigation_asserter    = new NavigationAsserter( $this );
-		$this->experiment_steps       = new ExperimentSteps( $this );
 	}
 }

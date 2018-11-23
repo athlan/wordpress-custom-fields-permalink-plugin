@@ -54,7 +54,6 @@ class NestedPageWithMetaKey extends BaseTestCase {
 	 */
 	function test_go_to_nested_page_not_using_meta_key_permalink_structure() {
 		// given.
-		$this->experiment_steps->given_experiment_enabled( 'chain_rewrite' );
 		$this->permalink_steps->given_permalink_structure( '/%field_some_meta_key%/%postname%/' );
 
 		$parent_page_params     = array(

@@ -18,6 +18,7 @@ if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
 
 // Give access to tests_add_filter() function.
 require_once $_tests_dir . '/includes/functions.php';
+require_once 'bootstrap-experimentals.php';
 
 /**
  * Manually load the plugin being tested.
@@ -36,6 +37,5 @@ require 'class-customposttypesteps.php';
 require 'class-authsteps.php';
 require 'class-permalinkasserter.php';
 require 'class-navigationasserter.php';
-require 'class-experimentsteps.php';
 
 define( 'WP_RUN_CORE_TESTS', true );
